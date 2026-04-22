@@ -1,0 +1,28 @@
+@startuml Sequence_Pitch_Stats_Phan_Tich
+title Biểu đồ tuần tự phân tích - View Pitch Stats (Xem thống kê sân)
+
+actor "Manager" as Manager
+participant "ManagerHomeView" as HomeView
+participant "ReportView" as ReportView
+participant "PitchStatsView" as PitchView
+participant "PitchStat" as PitchStat
+
+Manager -> HomeView : Chọn chức năng Xem báo cáo
+HomeView -> ReportView : yêu cầu hiển thị
+ReportView -> Manager : Hiển thị giao diện ReportView
+
+Manager -> ReportView : Click nút Thống kê sân
+ReportView -> PitchView : yêu cầu hiển thị
+PitchView -> Manager : Hiển thị giao diện\n(dropdown khoảng thời gian + nút Xem)
+
+Manager -> PitchView : Chọn loại khoảng thời gian,\nnhập giá trị, click Xem
+PitchView -> PitchStat : yêu cầu xử lý
+PitchStat -> PitchStat : getPitchStats(period, value)
+PitchStat --> PitchView : Trả danh sách kết quả thống kê sân
+PitchView -> Manager : Hiển thị bảng kết quả thống kê sân
+
+Manager -> PitchView : Click nút Quay lại
+PitchView -> HomeView : gọi lại
+HomeView -> Manager : Hiển thị giao diện trang chủ
+
+@enduml

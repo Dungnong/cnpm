@@ -1,0 +1,43 @@
+@startuml Sequence_Thiet_Ke
+title Sơ đồ tuần tự thiết kế - Module View Report (View Income Stats)
+
+actor "Manager" as Manager
+participant "ManagerHomeFrm" as HomeFrm
+participant "ReportFrm" as ReportFrm
+participant "IncomeStatsFrm" as IncomeStatsFrm
+participant "StatDAO" as StatDAO
+participant "IncomeStat" as IncomeStat
+
+Manager -> HomeFrm : Click nút "Xem báo cáo"
+HomeFrm -> HomeFrm : actionPerformed()
+HomeFrm -> ReportFrm : new ReportFrm()
+activate ReportFrm
+ReportFrm -> Manager : Hiển thị giao diện\n(4 nút chọn loại báo cáo)
+
+Manager -> ReportFrm : Click nút "Thống kê doanh thu"
+ReportFrm -> ReportFrm : actionPerformed()
+ReportFrm -> IncomeStatsFrm : new IncomeStatsFrm()
+activate IncomeStatsFrm
+IncomeStatsFrm -> Manager : Hiển thị giao diện\n(dropdown + txtPeriodValue + nút Xem)
+
+Manager -> IncomeStatsFrm : Chọn "Tháng", nhập "04/2025",\nclick nút Xem
+IncomeStatsFrm -> IncomeStatsFrm : actionPerformed()
+IncomeStatsFrm -> StatDAO : getIncomeStats("MONTH", "04/2025")
+activate StatDAO
+StatDAO -> StatDAO : Truy vấn tblBill theo khoảng thời gian
+StatDAO -> IncomeStat : new IncomeStat(periodName, totalCustomers, totalRevenue)
+activate IncomeStat
+IncomeStat --> StatDAO : Trả đối tượng IncomeStat
+deactivate IncomeStat
+StatDAO --> IncomeStatsFrm : Trả List<IncomeStat>
+deactivate StatDAO
+IncomeStatsFrm -> IncomeStatsFrm : actionPerformed() hiển thị kết quả
+IncomeStatsFrm -> Manager : Hiển thị bảng kết quả thống kê doanh thu
+
+Manager -> IncomeStatsFrm : Click nút "Quay lại"
+IncomeStatsFrm -> IncomeStatsFrm : actionPerformed()
+deactivate IncomeStatsFrm
+IncomeStatsFrm -> HomeFrm : new ManagerHomeFrm()
+HomeFrm -> Manager : Hiển thị lại giao diện trang chủ
+
+@enduml
