@@ -1,0 +1,28 @@
+@startuml Sequence_Income_Stats_Phan_Tich
+title Biểu đồ tuần tự phân tích - View Income Stats (Xem thống kê doanh thu)
+
+actor "Manager" as Manager
+participant "ManagerHomeView" as HomeView
+participant "ReportView" as ReportView
+participant "IncomeStatsView" as IncomeView
+participant "IncomeStat" as IncomeStat
+
+Manager -> HomeView : Chọn chức năng Xem báo cáo
+HomeView -> ReportView : yêu cầu hiển thị
+ReportView -> Manager : Hiển thị 4 nút chọn loại báo cáo
+
+Manager -> ReportView : Click nút Thống kê doanh thu
+ReportView -> IncomeView : yêu cầu hiển thị
+IncomeView -> Manager : Hiển thị giao diện\n(dropdown khoảng thời gian + nút Xem)
+
+Manager -> IncomeView : Chọn loại khoảng thời gian,\nnhập giá trị, click Xem
+IncomeView -> IncomeStat : yêu cầu xử lý
+IncomeStat -> IncomeStat : getIncomeStats(period, value)
+IncomeStat --> IncomeView : Trả kết quả thống kê doanh thu
+IncomeView -> Manager : Hiển thị bảng kết quả thống kê
+
+Manager -> IncomeView : Click nút Quay lại
+IncomeView -> HomeView : gọi lại
+HomeView -> Manager : Hiển thị giao diện trang chủ
+
+@enduml

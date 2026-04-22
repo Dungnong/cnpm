@@ -1,0 +1,28 @@
+@startuml UC_Tong_Quan
+left to right direction
+skinparam packageStyle rectangle
+
+actor "Manager" as Manager
+
+rectangle "Hệ thống quản lý sân bóng" {
+    usecase "Login" as UC_Login
+    usecase "View report\n(Xem báo cáo)" as UC_ViewReport
+    usecase "View income stats\n(Xem thống kê doanh thu)" as UC_Income
+    usecase "View pitch stats\n(Xem thống kê sân)" as UC_Pitch
+    usecase "View customer stats\n(Xem thống kê khách hàng)" as UC_Customer
+    usecase "View service stats\n(Xem thống kê dịch vụ)" as UC_Service
+    usecase "Change password" as UC_ChangePwd
+    usecase "Logout" as UC_Logout
+}
+
+Manager --> UC_Login
+Manager --> UC_ViewReport
+Manager --> UC_ChangePwd
+Manager --> UC_Logout
+
+UC_Income ..> UC_ViewReport : <<extend>>
+UC_Pitch ..> UC_ViewReport : <<extend>>
+UC_Customer ..> UC_ViewReport : <<extend>>
+UC_Service ..> UC_ViewReport : <<extend>>
+
+@enduml

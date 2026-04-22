@@ -1,0 +1,28 @@
+@startuml Sequence_Service_Stats_Phan_Tich
+title Biểu đồ tuần tự phân tích - View Service Stats (Xem thống kê dịch vụ)
+
+actor "Manager" as Manager
+participant "ManagerHomeView" as HomeView
+participant "ReportView" as ReportView
+participant "ServiceStatsView" as ServiceView
+participant "ServiceStat" as ServiceStat
+
+Manager -> HomeView : Chọn chức năng Xem báo cáo
+HomeView -> ReportView : yêu cầu hiển thị
+ReportView -> Manager : Hiển thị giao diện ReportView
+
+Manager -> ReportView : Click nút Thống kê dịch vụ
+ReportView -> ServiceView : yêu cầu hiển thị
+ServiceView -> Manager : Hiển thị giao diện\n(dropdown khoảng thời gian + nút Xem)
+
+Manager -> ServiceView : Chọn loại khoảng thời gian,\nnhập giá trị, click Xem
+ServiceView -> ServiceStat : yêu cầu xử lý
+ServiceStat -> ServiceStat : getServiceStats(period, value)
+ServiceStat --> ServiceView : Trả danh sách thống kê dịch vụ
+ServiceView -> Manager : Hiển thị bảng thống kê dịch vụ
+
+Manager -> ServiceView : Click nút Quay lại
+ServiceView -> HomeView : gọi lại
+HomeView -> Manager : Hiển thị giao diện trang chủ
+
+@enduml

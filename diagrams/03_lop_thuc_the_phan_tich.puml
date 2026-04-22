@@ -1,0 +1,71 @@
+@startuml Lop_Thuc_The_Phan_Tich
+skinparam classAttributeIconSize 0
+
+class Pitch {
+    - name: String
+    - type: String
+    - description: String
+    + getName(): String
+    + getType(): String
+    + getDescription(): String
+}
+
+class Client {
+    - fullName: String
+    - phone: String
+    + getFullName(): String
+    + getPhone(): String
+}
+
+class Service {
+    - name: String
+    - unit: String
+    + getName(): String
+    + getUnit(): String
+}
+
+class Bill {
+    - billId: int
+    - totalAmount: double
+    - paymentDate: Date
+    + getBillId(): int
+    + getTotalAmount(): double
+    + getPaymentDate(): Date
+}
+
+class PitchStat {
+    - totalHoursUsed: double
+    - totalRevenue: double
+    + getTotalHoursUsed(): double
+    + getTotalRevenue(): double
+}
+
+class ClientStat {
+    - totalBookings: int
+    - totalSpent: double
+    + getTotalBookings(): int
+    + getTotalSpent(): double
+}
+
+class ServiceStat {
+    - totalQuantitySold: int
+    - totalRevenue: double
+    + getTotalQuantitySold(): int
+    + getTotalRevenue(): double
+}
+
+class IncomeStat {
+    - periodName: String
+    - totalCustomers: int
+    - totalRevenue: double
+    + getPeriodName(): String
+    + getTotalCustomers(): int
+    + getTotalRevenue(): double
+}
+
+Pitch <|-- PitchStat
+Client <|-- ClientStat
+Service <|-- ServiceStat
+Bill "1..*" --> "1" IncomeStat : tổng hợp thành
+
+@enduml

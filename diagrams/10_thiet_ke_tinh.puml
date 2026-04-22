@@ -1,0 +1,151 @@
+@startuml Thiet_Ke_Tinh_Design_Class
+title Thiết kế tĩnh - Design Class Diagram (Module View Report)
+skinparam classAttributeIconSize 0
+
+' ===== Form / UI Classes =====
+class ManagerHomeFrm {
+    + ManagerHomeFrm()
+    + actionPerformed(e: ActionEvent): void
+}
+
+class ReportFrm {
+    + ReportFrm()
+    + actionPerformed(e: ActionEvent): void
+}
+
+class IncomeStatsFrm {
+    - cmbPeriodType: JComboBox
+    - txtPeriodValue: JTextField
+    - tblResult: JTable
+    + IncomeStatsFrm()
+    + actionPerformed(e: ActionEvent): void
+    + displayResult(stats: List<IncomeStat>): void
+}
+
+class PitchStatsFrm {
+    - cmbPeriodType: JComboBox
+    - txtPeriodValue: JTextField
+    - tblResult: JTable
+    + PitchStatsFrm()
+    + actionPerformed(e: ActionEvent): void
+    + displayResult(stats: List<PitchStat>): void
+}
+
+class CustomerStatsFrm {
+    - cmbPeriodType: JComboBox
+    - txtPeriodValue: JTextField
+    - tblResult: JTable
+    + CustomerStatsFrm()
+    + actionPerformed(e: ActionEvent): void
+    + displayResult(stats: List<ClientStat>): void
+}
+
+class ServiceStatsFrm {
+    - cmbPeriodType: JComboBox
+    - txtPeriodValue: JTextField
+    - tblResult: JTable
+    + ServiceStatsFrm()
+    + actionPerformed(e: ActionEvent): void
+    + displayResult(stats: List<ServiceStat>): void
+}
+
+' ===== Model / Entity Classes =====
+class IncomeStat {
+    - periodName: String
+    - totalCustomers: int
+    - totalRevenue: double
+    + IncomeStat(periodName: String, totalCustomers: int, totalRevenue: double)
+    + getPeriodName(): String
+    + getTotalCustomers(): int
+    + getTotalRevenue(): double
+}
+
+class Pitch {
+    - pitchId: int
+    - name: String
+    - type: String
+    - description: String
+    + getName(): String
+    + getType(): String
+    + getDescription(): String
+}
+
+class PitchStat {
+    - totalHoursUsed: double
+    - totalRevenue: double
+    + PitchStat()
+    + getTotalHoursUsed(): double
+    + getTotalRevenue(): double
+    + setTotalHoursUsed(v: double): void
+    + setTotalRevenue(v: double): void
+}
+
+class Client {
+    - clientId: int
+    - fullName: String
+    - phone: String
+    + getFullName(): String
+    + getPhone(): String
+}
+
+class ClientStat {
+    - totalBookings: int
+    - totalSpent: double
+    + ClientStat()
+    + getTotalBookings(): int
+    + getTotalSpent(): double
+    + setTotalBookings(v: int): void
+    + setTotalSpent(v: double): void
+}
+
+class Service {
+    - serviceId: int
+    - name: String
+    - unit: String
+    + getName(): String
+    + getUnit(): String
+}
+
+class ServiceStat {
+    - totalQuantitySold: int
+    - totalRevenue: double
+    + ServiceStat()
+    + getTotalQuantitySold(): int
+    + getTotalRevenue(): double
+    + setTotalQuantitySold(v: int): void
+    + setTotalRevenue(v: double): void
+}
+
+' ===== DAO Class =====
+class StatDAO {
+    + getIncomeStats(period: String, value: String): List<IncomeStat>
+    + getPitchStats(period: String, value: String): List<PitchStat>
+    + getClientStats(period: String, value: String): List<ClientStat>
+    + getServiceStats(period: String, value: String): List<ServiceStat>
+}
+
+' ===== Inheritance =====
+Pitch <|-- PitchStat
+Client <|-- ClientStat
+Service <|-- ServiceStat
+
+' ===== UI Navigation =====
+ManagerHomeFrm --> ReportFrm : opens
+ReportFrm --> IncomeStatsFrm : opens
+ReportFrm --> PitchStatsFrm : opens
+ReportFrm --> CustomerStatsFrm : opens
+ReportFrm --> ServiceStatsFrm : opens
+
+' ===== DAO Dependencies =====
+IncomeStatsFrm --> StatDAO : calls getIncomeStats()
+PitchStatsFrm --> StatDAO : calls getPitchStats()
+CustomerStatsFrm --> StatDAO : calls getClientStats()
+ServiceStatsFrm --> StatDAO : calls getServiceStats()
+
+' ===== DAO returns =====
+StatDAO ..> IncomeStat : creates
+StatDAO ..> PitchStat : creates
+StatDAO ..> ClientStat : creates
+StatDAO ..> ServiceStat : creates
+
+@enduml

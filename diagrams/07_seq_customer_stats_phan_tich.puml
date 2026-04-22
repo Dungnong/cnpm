@@ -1,0 +1,28 @@
+@startuml Sequence_Customer_Stats_Phan_Tich
+title Biểu đồ tuần tự phân tích - View Customer Stats (Xem thống kê khách hàng)
+
+actor "Manager" as Manager
+participant "ManagerHomeView" as HomeView
+participant "ReportView" as ReportView
+participant "CustomerStatsView" as CustomerView
+participant "ClientStat" as ClientStat
+
+Manager -> HomeView : Chọn chức năng Xem báo cáo
+HomeView -> ReportView : yêu cầu hiển thị
+ReportView -> Manager : Hiển thị giao diện ReportView
+
+Manager -> ReportView : Click nút Thống kê khách hàng
+ReportView -> CustomerView : yêu cầu hiển thị
+CustomerView -> Manager : Hiển thị giao diện\n(dropdown khoảng thời gian + nút Xem)
+
+Manager -> CustomerView : Chọn loại khoảng thời gian,\nnhập giá trị, click Xem
+CustomerView -> ClientStat : yêu cầu xử lý
+ClientStat -> ClientStat : getClientStats(period, value)
+ClientStat --> CustomerView : Trả danh sách thống kê khách hàng
+CustomerView -> Manager : Hiển thị bảng thống kê khách hàng
+
+Manager -> CustomerView : Click nút Quay lại
+CustomerView -> HomeView : gọi lại
+HomeView -> Manager : Hiển thị giao diện trang chủ
+
+@enduml

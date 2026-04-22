@@ -1,0 +1,84 @@
+@startuml So_Do_Lop_Phan_Tich
+skinparam classAttributeIconSize 0
+
+' ===== Boundary classes (Views) =====
+class ManagerHomeView <<boundary>> {
+    + showManagerHome(): void
+    + navigateToReport(): void
+}
+
+class ReportView <<boundary>> {
+    + showReportOptions(): void
+    + onSelectIncomeStats(): void
+    + onSelectPitchStats(): void
+    + onSelectCustomerStats(): void
+    + onSelectServiceStats(): void
+}
+
+class IncomeStatsView <<boundary>> {
+    + showIncomeStats(): void
+    + onViewStats(period: String, value: String): void
+    + displayResult(stats: List<IncomeStat>): void
+    + navigateBack(): void
+}
+
+class PitchStatsView <<boundary>> {
+    + showPitchStats(): void
+    + onViewStats(period: String, value: String): void
+    + displayResult(stats: List<PitchStat>): void
+    + navigateBack(): void
+}
+
+class CustomerStatsView <<boundary>> {
+    + showCustomerStats(): void
+    + onViewStats(period: String, value: String): void
+    + displayResult(stats: List<ClientStat>): void
+    + navigateBack(): void
+}
+
+class ServiceStatsView <<boundary>> {
+    + showServiceStats(): void
+    + onViewStats(period: String, value: String): void
+    + displayResult(stats: List<ServiceStat>): void
+    + navigateBack(): void
+}
+
+' ===== Entity classes =====
+class IncomeStat <<entity>> {
+    - periodName: String
+    - totalCustomers: int
+    - totalRevenue: double
+    + getIncomeStats(period: String, value: String): List<IncomeStat>
+}
+
+class PitchStat <<entity>> {
+    - totalHoursUsed: double
+    - totalRevenue: double
+    + getPitchStats(period: String, value: String): List<PitchStat>
+}
+
+class ClientStat <<entity>> {
+    - totalBookings: int
+    - totalSpent: double
+    + getClientStats(period: String, value: String): List<ClientStat>
+}
+
+class ServiceStat <<entity>> {
+    - totalQuantitySold: int
+    - totalRevenue: double
+    + getServiceStats(period: String, value: String): List<ServiceStat>
+}
+
+' ===== Relationships =====
+ManagerHomeView --> ReportView : navigates to
+ReportView --> IncomeStatsView : navigates to
+ReportView --> PitchStatsView : navigates to
+ReportView --> CustomerStatsView : navigates to
+ReportView --> ServiceStatsView : navigates to
+
+IncomeStatsView --> IncomeStat : uses
+PitchStatsView --> PitchStat : uses
+CustomerStatsView --> ClientStat : uses
+ServiceStatsView --> ServiceStat : uses
+
+@enduml

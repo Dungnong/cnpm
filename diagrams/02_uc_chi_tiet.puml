@@ -1,0 +1,34 @@
+@startuml UC_Chi_Tiet
+left to right direction
+skinparam packageStyle rectangle
+
+actor "Manager" as Manager
+
+rectangle "UC1: Manager Login" {
+    usecase "Login" as UC_Login
+    usecase "Change password\n(Đổi mật khẩu)" as UC_ChangePwd
+    usecase "Logout\n(Đăng xuất)" as UC_Logout
+}
+
+rectangle "UC2: View Report (Xem báo cáo)" {
+    usecase "View report\n(Xem báo cáo)" as UC_ViewReport
+    usecase "View income stats\n(Xem thống kê doanh thu)" as UC_Income
+    usecase "View pitch stats\n(Xem thống kê sân)" as UC_Pitch
+    usecase "View customer stats\n(Xem thống kê khách hàng)" as UC_Customer
+    usecase "View service stats\n(Xem thống kê dịch vụ)" as UC_Service
+}
+
+Manager --> UC_Login
+Manager --> UC_ChangePwd
+Manager --> UC_Logout
+Manager --> UC_ViewReport
+
+UC_Income ..> UC_ViewReport : <<extend>>
+UC_Pitch ..> UC_ViewReport : <<extend>>
+UC_Customer ..> UC_ViewReport : <<extend>>
+UC_Service ..> UC_ViewReport : <<extend>>
+
+UC_Login <.. UC_ChangePwd : <<include>>
+UC_Login <.. UC_Logout : <<include>>
+
+@enduml
