@@ -1,5 +1,19 @@
 @startuml Lop_Thuc_The_Phan_Tich
 skinparam classAttributeIconSize 0
+skinparam linetype ortho
+skinparam defaultFontName Arial
+skinparam backgroundColor White
+skinparam class {
+    BackgroundColor #C8E3F5
+    BorderColor #1F6AA5
+    HeaderBackgroundColor #1F6AA5
+    FontColor Black
+    AttributeFontColor Black
+    StereotypeFontColor White
+}
+skinparam arrow {
+    Color #1F6AA5
+}
 
 class Pitch {
     - name: String

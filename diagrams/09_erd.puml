@@ -1,5 +1,17 @@
 @startuml ERD_So_Do_Thuc_The
 title Sơ đồ thực thể (Entity Relationship Diagram)
+skinparam linetype ortho
+skinparam defaultFontName Arial
+skinparam backgroundColor White
+skinparam entity {
+    BackgroundColor #C8E3F5
+    BorderColor #1F6AA5
+    FontColor Black
+    HeaderBackgroundColor #1F6AA5
+}
+skinparam arrow {
+    Color #1F6AA5
+}
 
 entity "tblManager" as Manager {
     * managerId : INT <<PK>>
