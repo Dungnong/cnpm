@@ -1,6 +1,26 @@
 @startuml UC_Tong_Quan
 left to right direction
 skinparam packageStyle rectangle
+skinparam linetype ortho
+skinparam defaultFontName Arial
+skinparam backgroundColor White
+
+skinparam actor {
+    BackgroundColor #B8D9F0
+    BorderColor #1F6AA5
+    FontColor Black
+}
+skinparam usecase {
+    BackgroundColor White
+    BorderColor #1F6AA5
+    ArrowColor #1F6AA5
+    FontColor Black
+}
+skinparam rectangle {
+    BackgroundColor #C8E3F5
+    BorderColor #1F6AA5
+    FontColor #1F6AA5
+}
 
 actor "Manager" as Manager
 

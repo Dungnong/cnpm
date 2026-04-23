@@ -1,5 +1,21 @@
 @startuml Sequence_Pitch_Stats_Phan_Tich
 title Biểu đồ tuần tự phân tích - View Pitch Stats (Xem thống kê sân)
+skinparam defaultFontName Arial
+skinparam backgroundColor White
+skinparam sequenceArrowThickness 1
+skinparam sequenceArrowColor #1F6AA5
+skinparam sequenceLifeLineBorderColor #1F6AA5
+skinparam sequenceLifeLineBackgroundColor #E8F4FD
+skinparam participant {
+    BackgroundColor #C8E3F5
+    BorderColor #1F6AA5
+    FontColor Black
+}
+skinparam actor {
+    BackgroundColor #C8E3F5
+    BorderColor #1F6AA5
+    FontColor Black
+}
 
 actor "Manager" as Manager
 participant "ManagerHomeView" as HomeView

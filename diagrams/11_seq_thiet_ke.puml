@@ -1,5 +1,21 @@
 @startuml Sequence_Thiet_Ke
 title Sơ đồ tuần tự thiết kế - Module View Report (View Income Stats)
+skinparam defaultFontName Arial
+skinparam backgroundColor White
+skinparam sequenceArrowThickness 1
+skinparam sequenceArrowColor #1F6AA5
+skinparam sequenceLifeLineBorderColor #1F6AA5
+skinparam sequenceLifeLineBackgroundColor #E8F4FD
+skinparam participant {
+    BackgroundColor #C8E3F5
+    BorderColor #1F6AA5
+    FontColor Black
+}
+skinparam actor {
+    BackgroundColor #C8E3F5
+    BorderColor #1F6AA5
+    FontColor Black
+}
 
 actor "Manager" as Manager
 participant "ManagerHomeFrm" as HomeFrm
