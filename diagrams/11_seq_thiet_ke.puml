@@ -57,3 +57,63 @@ IncomeStatsFrm -> HomeFrm : new ManagerHomeFrm()
 HomeFrm -> Manager : Hiển thị lại giao diện trang chủ
 
 @enduml
+
+@startuml Sequence_Thiet_Ke_Pitch_Stats
+title Sơ đồ tuần tự thiết kế - Module View Report (View Pitch Stats)
+skinparam defaultFontName Arial
+skinparam backgroundColor White
+skinparam sequenceArrowThickness 1
+skinparam sequenceArrowColor #1F6AA5
+skinparam sequenceLifeLineBorderColor #1F6AA5
+skinparam sequenceLifeLineBackgroundColor #E8F4FD
+skinparam participant {
+    BackgroundColor #C8E3F5
+    BorderColor #1F6AA5
+    FontColor Black
+}
+skinparam actor {
+    BackgroundColor #C8E3F5
+    BorderColor #1F6AA5
+    FontColor Black
+}
+
+actor "Manager" as Manager
+participant "ManagerHomeFrm" as HomeFrm
+participant "ReportFrm" as ReportFrm
+participant "PitchStatsFrm" as PitchStatsFrm
+participant "StatDAO" as StatDAO
+participant "PitchStat" as PitchStat
+
+Manager -> HomeFrm : Click nút "Xem báo cáo"
+HomeFrm -> HomeFrm : actionPerformed()
+HomeFrm -> ReportFrm : new ReportFrm()
+activate ReportFrm
+ReportFrm -> Manager : Hiển thị giao diện\n(4 nút chọn loại báo cáo)
+
+Manager -> ReportFrm : Click nút "Thống kê sân"
+ReportFrm -> ReportFrm : actionPerformed()
+ReportFrm -> PitchStatsFrm : new PitchStatsFrm()
+activate PitchStatsFrm
+PitchStatsFrm -> Manager : Hiển thị giao diện\n(dropdown + txtPeriodValue + nút Xem)
+
+Manager -> PitchStatsFrm : Chọn "Tháng", nhập "04/2025",\nclick nút Xem
+PitchStatsFrm -> PitchStatsFrm : actionPerformed()
+PitchStatsFrm -> StatDAO : getPitchStats("MONTH", "04/2025")
+activate StatDAO
+StatDAO -> StatDAO : Truy vấn tblBill và tblPitch theo khoảng thời gian
+StatDAO -> PitchStat : new PitchStat(pitchId, name, type, totalHoursUsed, totalRevenue)
+activate PitchStat
+PitchStat --> StatDAO : Trả đối tượng PitchStat
+deactivate PitchStat
+StatDAO --> PitchStatsFrm : Trả List<PitchStat>
+deactivate StatDAO
+PitchStatsFrm -> PitchStatsFrm : displayResult(List<PitchStat>)
+PitchStatsFrm -> Manager : Hiển thị bảng kết quả thống kê sân
+
+Manager -> PitchStatsFrm : Click nút "Quay lại"
+PitchStatsFrm -> PitchStatsFrm : actionPerformed()
+deactivate PitchStatsFrm
+PitchStatsFrm -> HomeFrm : new ManagerHomeFrm()
+HomeFrm -> Manager : Hiển thị lại giao diện trang chủ
+
+@enduml
