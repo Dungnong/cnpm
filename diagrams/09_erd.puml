@@ -1,16 +1,20 @@
 @startuml ERD_So_Do_Thuc_The
 title Sơ đồ thực thể (Entity Relationship Diagram)
+hide circle
+skinparam classAttributeIconSize 0
 skinparam linetype ortho
 skinparam defaultFontName Arial
 skinparam backgroundColor White
 skinparam entity {
-    BackgroundColor #C8E3F5
-    BorderColor #1F6AA5
-    FontColor Black
-    HeaderBackgroundColor #1F6AA5
+    BackgroundColor #FFFFFF
+    BorderColor #1B3A6B
+    FontColor White
+    HeaderBackgroundColor #1B3A6B
+    AttributeFontColor Black
+    StereotypeFontColor White
 }
 skinparam arrow {
-    Color #1F6AA5
+    Color #1B3A6B
 }
 
 entity "tblManager" as Manager {
