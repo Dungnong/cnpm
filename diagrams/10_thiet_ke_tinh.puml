@@ -1,5 +1,6 @@
 @startuml Thiet_Ke_Tinh_Design_Class
 title Thiết kế tĩnh - Design Class Diagram (Module View Report)
+hide circle
 skinparam classAttributeIconSize 0
 skinparam linetype ortho
 skinparam defaultFontName Arial
@@ -8,7 +9,7 @@ skinparam class {
     BackgroundColor #C8E3F5
     BorderColor #1F6AA5
     HeaderBackgroundColor #1F6AA5
-    FontColor Black
+    FontColor White
     AttributeFontColor Black
     StereotypeFontColor White
 }
